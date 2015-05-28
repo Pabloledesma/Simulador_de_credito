@@ -2,10 +2,11 @@
 
 include 'Prestamo.php';
 
-if(isset($_POST['saldo'], $_POST['cuotas'])){
+if(isset($_POST['saldo'], $_POST['cuotas'], $_POST['cuota'])){
 	
 	$saldo = $_POST['saldo'];
 	$cuotas = $_POST['cuotas'];
+	$cuota = strval($_POST['cuota']);
 
 	$prestamo = new Prestamo(10);
 	// Configuramos el valor que pedimos de préstamo.
@@ -13,7 +14,8 @@ if(isset($_POST['saldo'], $_POST['cuotas'])){
 	// Establecemos como vamos a pagar el préstamo.
 	// En este caso de la cuota 1 a la 10 $ 1200.
 	// Se pueden definir varios tramos de pago de distinto valor.
-	$cuota = strval($saldo / $cuotas);
+	
+	
 	$prestamo->pagos(1, $cuotas, $cuota);
 	// Calculamos la tasa de interes que nos estan cobrando.
 	$b = $prestamo->calcularTasaInteres();
